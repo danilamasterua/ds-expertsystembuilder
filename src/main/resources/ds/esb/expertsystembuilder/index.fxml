@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import org.controlsfx.control.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ds.esb.expertsystembuilder.controllers.IndexController">
+    <VBox AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <children>
+           <MenuBar fx:id="mainMenu">
+               <Menu text="Файл">
+                   <MenuItem fx:id="chooseProjectBtn" onAction="#chooseProject" text="Завантажити проєкт" />
+                   <MenuItem onAction="#exit" text="Вийти" />
+               </Menu>
+           </MenuBar>
+         <BorderPane>
+             <left>
+               <VBox fx:id="variablePane" spacing="5" style="-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1; -fx-padding: 2;" BorderPane.alignment="CENTER_LEFT" />
+             </left>
+             <center>
+                <TextArea fx:id="variableStatusesTextArea" editable="false"/>
+             </center>
+         </BorderPane>
+      </children>
+        <Label fx:id="debugLabel" />
+    </VBox>
+    <StatusBar fx:id="statusBar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+    </StatusBar>
+</AnchorPane>
