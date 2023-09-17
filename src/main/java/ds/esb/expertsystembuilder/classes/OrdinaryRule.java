@@ -3,34 +3,26 @@ package ds.esb.expertsystembuilder.classes;
 import com.google.gson.JsonObject;
 import ds.esb.expertsystembuilder.classes.bean.Rule;
 
+import java.util.HashMap;
+
 public class OrdinaryRule extends Rule {
     private int target;
     private int ifR;
-    private int elseR;
-
     public OrdinaryRule() {
+        super(0,0,0);
     }
-    public OrdinaryRule(int queue, int target, int ifR, int elseR) {
+    public OrdinaryRule(int queue, int target, int ifR, int elseR, int thenR) {
+        super(queue, elseR, thenR);
         this.setQueue(queue);
         this.setIfR(ifR);
         this.setElseR(elseR);
         this.setTarget(target);
     }
-
     public int getIfR() {
         return ifR;
     }
-
     public void setIfR(int ifR) {
         this.ifR = ifR;
-    }
-
-    public int getElseR() {
-        return elseR;
-    }
-
-    public void setElseR(int elseR) {
-        this.elseR = elseR;
     }
     public int getTarget() {return target;}
     public void setTarget(int target) {this.target = target;}
@@ -40,5 +32,9 @@ public class OrdinaryRule extends Rule {
         this.setTarget(jo.get("target").getAsInt());
         this.setIfR(jo.get("if").getAsInt());
         this.setElseR(jo.get("else").getAsInt());
+    }
+    @Override
+    public boolean checkRule(HashMap<Integer, Integer> values){
+        return values.get(this.target).equals(ifR);
     }
 }
