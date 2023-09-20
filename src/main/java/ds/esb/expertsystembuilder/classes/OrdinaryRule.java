@@ -31,7 +31,6 @@ public class OrdinaryRule extends Rule {
         super.getRuleFromJsonObject(jo);
         this.setTarget(jo.get("target").getAsInt());
         this.setIfR(jo.get("if").getAsInt());
-        this.setElseR(jo.get("else").getAsInt());
     }
     @Override
     public boolean checkRule(HashMap<Integer, Integer> values){

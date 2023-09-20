@@ -4,26 +4,35 @@
 <?import javafx.scene.layout.*?>
 <?import org.controlsfx.control.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ds.esb.expertsystembuilder.controllers.IndexController">
-    <VBox AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <children>
+<BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ds.esb.expertsystembuilder.controllers.IndexController">
+    <top>
            <MenuBar fx:id="mainMenu">
                <Menu text="Файл">
                    <MenuItem fx:id="chooseProjectBtn" onAction="#chooseProject" text="Завантажити проєкт" />
                    <MenuItem onAction="#exit" text="Вийти" />
                </Menu>
            </MenuBar>
+    </top>
+    <center>
          <BorderPane>
              <left>
-               <VBox fx:id="variablePane" spacing="5" style="-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1; -fx-padding: 2;" BorderPane.alignment="CENTER_LEFT" />
+                <VBox prefWidth="300" fx:id="variablePane" spacing="5" style="-fx-border-style: solid; -fx-border-color: lightgrey; -fx-border-width: 1; -fx-padding: 2;" BorderPane.alignment="CENTER_LEFT">
+                    <Label prefWidth="300" style="-fx-font-size: 24;">Змінні</Label>
+                </VBox>
              </left>
              <center>
                 <TextArea fx:id="variableStatusesTextArea" editable="false"/>
              </center>
+             <right>
+                 <VBox prefWidth="300" style="-fx-border-style: solid; -fx-border-color: lightgrey; -fx-border-width: 1; -fx-padding: 2;">
+                     <Label prefWidth="300" style="-fx-font-size: 24;">Рішення</Label>
+                 </VBox>
+             </right>
          </BorderPane>
-      </children>
-        <Label fx:id="debugLabel" />
-    </VBox>
+    </center>
+    <bottom>
     <StatusBar fx:id="statusBar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <rightItems><Label fx:id="debugLabel" /></rightItems>
     </StatusBar>
-</AnchorPane>
+    </bottom>
+</BorderPane>

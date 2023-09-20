@@ -26,6 +26,8 @@ public abstract class Rule {
 
     public void getRuleFromJsonObject(JsonObject jsonObject){
         this.setQueue(jsonObject.get("queue").getAsInt());
+        this.setElseR(jsonObject.get("else").getAsInt());
+        this.setThenR(jsonObject.get("then").getAsInt());
     }
     public boolean checkRule(HashMap<Integer, Integer> values){return false;}
 }

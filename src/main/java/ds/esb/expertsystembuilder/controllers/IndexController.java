@@ -39,6 +39,8 @@ public class IndexController {
     private Map<String, ComboBox<String>> variablesComboBoxes = new HashMap<>();
     private Map<Integer, Integer> variablesResults = new HashMap<>();
     Model model = new Model();
+
+
     @FXML
     public void exit(){
         Stage stage = (Stage) mainMenu.getScene().getWindow();

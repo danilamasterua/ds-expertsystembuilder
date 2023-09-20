@@ -33,11 +33,14 @@ public class RulesContainer {
             for(JsonElement el:array){
                 JsonObject jo = el.getAsJsonObject();
                 String type = jo.get("type").getAsString();
+                Rule rule;
                 if(type.equals("ordinary")){
-                    OrdinaryRule oRule = new OrdinaryRule();
-                    oRule.getRuleFromJsonObject(jo);
-                    this.addRule(oRule);
+                    rule = new OrdinaryRule();
+                } else {
+                    rule = new BinaryRule();
                 }
+                rule.getRuleFromJsonObject(jo);
+                this.addRule(rule);
             }
             return 200;
         } catch (IOException e){
