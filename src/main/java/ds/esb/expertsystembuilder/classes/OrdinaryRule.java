@@ -3,7 +3,6 @@ package ds.esb.expertsystembuilder.classes;
 import com.google.gson.JsonObject;
 import ds.esb.expertsystembuilder.classes.bean.Rule;
 
-import java.util.HashMap;
 
 public class OrdinaryRule extends Rule {
     private int target;
@@ -33,7 +32,7 @@ public class OrdinaryRule extends Rule {
         this.setIfR(jo.get("if").getAsInt());
     }
     @Override
-    public boolean checkRule(HashMap<Integer, Integer> values){
-        return values.get(this.target).equals(ifR);
+    public boolean checkRule(Model model){
+        return false; 
     }
 }

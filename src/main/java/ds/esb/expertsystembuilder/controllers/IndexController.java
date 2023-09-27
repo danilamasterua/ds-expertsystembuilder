@@ -36,8 +36,7 @@ public class IndexController {
     private MenuBar mainMenu;
     @FXML
     private VBox variablePane;
-    private Map<String, ComboBox<String>> variablesComboBoxes = new HashMap<>();
-    private Map<Integer, Integer> variablesResults = new HashMap<>();
+    private Map<Integer, ComboBox<String>> variablesComboBoxes = new HashMap<>();
     Model model = new Model();
 
 
@@ -57,7 +56,7 @@ public class IndexController {
             statusBar.setText(dir.getAbsolutePath());
             addVariablesFields(model.getVariables());
             chooseProjectBtn.setDisable(true);
-        } catch (Exception ex){
+        } catch (RuntimeException ex){
             statusBar.setText(ex.getMessage());
         }
     }
@@ -67,11 +66,10 @@ public class IndexController {
         ArrayList<HBox> hboxes = new ArrayList<>();
         for (Map.Entry<Integer, Variable> entry:variables.getVariables().entrySet()){
             HBox var = new HBox(10);
-
             Label label = new Label(entry.getValue().getName());
             label.setMinWidth(50);
             label.setAlignment(Pos.BASELINE_RIGHT);
-            ComboBox<String> status = new ComboBox<String>();
+            ComboBox<String> status = new ComboBox<>();
             status.setMinWidth(70);
             status.setId("var"+entry.getValue().getId());
             for (Map.Entry<Integer, String> entry1:entry.getValue().getStatuses().entrySet()){
@@ -79,7 +77,7 @@ public class IndexController {
             }
             var.getChildren().addAll(label, status);
             hboxes.add(var);
-            variablesComboBoxes.put(String.valueOf(entry.getValue().getId()), status);
+            variablesComboBoxes.put(entry.getValue().getId(), status);
         }
         for (HBox hBox:hboxes){
             variablePane.getChildren().add(hBox);
@@ -87,30 +85,22 @@ public class IndexController {
         Button button = new Button("Записати");
         button.setId("setVariablesBtn");
         variablePane.getChildren().add(button);
-        button.setOnAction(new EventHandler<ActionEvent>() {
+        button.setOnAction(check);
+    }
+    
+    private final EventHandler<ActionEvent> check = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                for(Map.Entry<String, ComboBox<String>> entry:variablesComboBoxes.entrySet()){
+                for(Map.Entry<Integer, ComboBox<String>> entry:variablesComboBoxes.entrySet()){
                     try {
-                        int varId = Integer.parseInt(entry.getKey());
-                        Variable variable = model.getVariables().getVariableById(varId);
-                        variablesResults.put(varId, variable.searchStatusIdByValue(entry.getValue().getValue()));
+                        model.getChoices().put(entry.getKey(), model.getVariables().getVariableById(entry.getKey()).searchStatusIdByValue(entry.getValue().toString()));
+                        String str = model.doLogic();
+                        variableStatusesTextArea.setText(str);
                         statusBar.setText("Відповіді записано");
                     } catch (Exception e){
                         statusBar.setText(e.getMessage());
                     }
                 }
-                StringBuilder sb = new StringBuilder();
-                for (Map.Entry<Integer, Integer> entry:variablesResults.entrySet()){
-                    try {
-                        Variable variable=model.getVariables().getVariableById(entry.getKey());
-                        sb.append(variable.getName()).append("->").append(variable.getStatuses().get(entry.getValue())).append("\n");
-                    } catch (Exception e){
-                        statusBar.setText(e.getMessage());
-                    }
-                }
-                variableStatusesTextArea.setText(sb.toString());
             }
-        });
-    }
+        }; 
 }

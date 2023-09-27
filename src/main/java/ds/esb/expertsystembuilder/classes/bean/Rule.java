@@ -2,7 +2,7 @@ package ds.esb.expertsystembuilder.classes.bean;
 
 import com.google.gson.JsonObject;
 
-import java.util.HashMap;
+import ds.esb.expertsystembuilder.classes.Model;
 
 public abstract class Rule {
     private int queue;
@@ -29,5 +29,5 @@ public abstract class Rule {
         this.setElseR(jsonObject.get("else").getAsInt());
         this.setThenR(jsonObject.get("then").getAsInt());
     }
-    public boolean checkRule(HashMap<Integer, Integer> values){return false;}
+    public boolean checkRule(Model model){return false;}
 }

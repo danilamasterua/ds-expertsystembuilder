@@ -8,15 +8,15 @@ import java.util.HashMap;
 public class BinaryRule extends Rule {
     private int compared1;
     private int compared2;
-    private int ifR1;
-    private int ifR2;
+    private String ifR1;
+    private String ifR2;
     private String bType;
 
     public BinaryRule() {
         super(0,0,0);
     }
 
-    public BinaryRule(int queue, int compared1, int compared2, int ifR1, int ifR2, int elseR, int thenR, String bType) {
+    public BinaryRule(int queue, int compared1, int compared2, String ifR1, String ifR2, int elseR, int thenR, String bType) {
         super(queue, elseR, thenR);
         this.compared1 = compared1;
         this.compared2 = compared2;
@@ -41,19 +41,19 @@ public class BinaryRule extends Rule {
         this.compared2 = compared2;
     }
 
-    public int getIfR1() {
+    public String getIfR1() {
         return ifR1;
     }
 
-    public void setIfR1(int ifR1) {
+    public void setIfR1(String ifR1) {
         this.ifR1 = ifR1;
     }
 
-    public int getIfR2() {
+    public String getIfR2() {
         return ifR2;
     }
 
-    public void setIfR2(int ifR2) {
+    public void setIfR2(String ifR2) {
         this.ifR2 = ifR2;
     }
     public String getbType() {return bType;}
@@ -65,12 +65,12 @@ public class BinaryRule extends Rule {
         this.setbType(jsonObject.get("bType").getAsString());
         this.setCompared1(jsonObject.get("compared1").getAsInt());
         this.setCompared2(jsonObject.get("compared2").getAsInt());
-        this.setIfR1(jsonObject.get("if1").getAsInt());
-        this.setIfR2(jsonObject.get("if2").getAsInt());
+        this.setIfR1(jsonObject.get("if1").getAsString());
+        this.setIfR2(jsonObject.get("if2").getAsString());
     }
 
     @Override
-    public boolean checkRule(HashMap<Integer, Integer> values) {
-        return super.checkRule(values);
+    public boolean checkRule(Model model) {
+      return false;  
     }
 }

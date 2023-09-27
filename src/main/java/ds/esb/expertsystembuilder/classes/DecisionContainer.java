@@ -5,9 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import ds.esb.expertsystembuilder.classes.bean.Decision;
-import ds.esb.expertsystembuilder.classes.bean.Rule;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -32,7 +30,9 @@ public class DecisionContainer {
             JsonArray array = JsonParser.parseString(json).getAsJsonArray();
             for(JsonElement el:array){
                 JsonObject jo = el.getAsJsonObject();
-
+                Decision decision = new Decision();
+                decision.getDecisionFromJsonObject(jo);
+                this.decisions.put(jo.get("decisionId").getAsInt(), decision);
             }
             return 200;
         } catch (IOException ex){
