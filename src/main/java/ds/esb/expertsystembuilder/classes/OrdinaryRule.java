@@ -14,7 +14,6 @@ public class OrdinaryRule extends Rule {
         super(queue, elseR, thenR);
         this.setQueue(queue);
         this.setIfR(ifR);
-        this.setElseR(elseR);
         this.setTarget(target);
     }
     public int getIfR() {

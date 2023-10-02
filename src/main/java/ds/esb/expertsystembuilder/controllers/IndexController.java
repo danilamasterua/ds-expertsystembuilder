@@ -31,6 +31,8 @@ public class IndexController {
     @FXML
     public MenuItem chooseProjectBtn;
     @FXML
+    public Label decisionLabel;
+    @FXML
     private Label debugLabel;
     @FXML
     private MenuBar mainMenu;
@@ -93,14 +95,15 @@ public class IndexController {
             public void handle(ActionEvent actionEvent) {
                 for(Map.Entry<Integer, ComboBox<String>> entry:variablesComboBoxes.entrySet()){
                     try {
-                        model.getChoices().put(entry.getKey(), model.getVariables().getVariableById(entry.getKey()).searchStatusIdByValue(entry.getValue().toString()));
-                        String str = model.doLogic();
-                        variableStatusesTextArea.setText(str);
-                        statusBar.setText("Відповіді записано");
+                        model.putChoice(entry.getKey(), model.getVariables().getVariableById(entry.getKey()).searchStatusIdByValue(entry.getValue().getValue()));
                     } catch (Exception e){
                         statusBar.setText(e.getMessage());
                     }
                 }
+                String str = model.doLogic();
+                variableStatusesTextArea.setText(str);
+                statusBar.setText("Відповіді записано");
+                decisionLabel.setText(model.getDecision().getInference());
             }
         }; 
 }

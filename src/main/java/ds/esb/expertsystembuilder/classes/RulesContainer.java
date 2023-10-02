@@ -36,7 +36,7 @@ public class RulesContainer {
                 Rule rule;
                 if(type.equals("ordinary")){
                     rule = new OrdinaryRule();
-                } else {
+                } else{
                     rule = new BinaryRule();
                 }
                 rule.getRuleFromJsonObject(jo);
