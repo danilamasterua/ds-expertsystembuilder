@@ -25,28 +25,65 @@ public class RulesContainer {
         rules.add(rule);
         rules.sort(Comparator.comparingInt(Rule::getQueue));
     }
-    public int loadRulesFromJson(String path){
-        try {
+
+    public int loadExpertRules(String path){
+        try{
             Path file = FileSystems.getDefault().getPath(path+"/rules.json");
             String json = Files.readString(file);
             JsonArray array = JsonParser.parseString(json).getAsJsonArray();
-            for(JsonElement el:array){
+            for(var el:array){
                 JsonObject jo = el.getAsJsonObject();
-                String type = jo.get("type").getAsString();
-                Rule rule;
-                if(type.equals("ordinary")){
-                    rule = new OrdinaryRule();
-                } else{
-                    rule = new BinaryRule();
-                }
+                Rule rule = new ExpertRule();
                 rule.getRuleFromJsonObject(jo);
                 this.addRule(rule);
             }
             return 200;
         } catch (IOException e){
-            e.printStackTrace();
             return 500;
         }
     }
+
+    public Rule getRuleById(int id){
+        Rule ruleD = null;
+        for (Rule rule: this.rules) {
+            if(rule.getQueue()==id){
+                 ruleD=rule;
+            }
+        }
+        if (ruleD==null){
+            throw new RuntimeException("Rule with id="+id+" is not found");
+        } else {
+            return ruleD;
+        }
+    }
+
+//    /**
+//     * Method for work with deprecated type of rules. Do not recommend to use.
+//     * @param path <i>String</i> path to folder, what contains file <b>rulesDeprecated.json</b>
+//     * @return <i>int</i> status code
+//     */
+//    public int loadRulesFromJson(String path){
+//        try {
+//            Path file = FileSystems.getDefault().getPath(path+"/rulesDeprecated.json");
+//            String json = Files.readString(file);
+//            JsonArray array = JsonParser.parseString(json).getAsJsonArray();
+//            for(JsonElement el:array){
+//                JsonObject jo = el.getAsJsonObject();
+//                String type = jo.get("type").getAsString();
+//                Rule rule;
+//                if(type.equals("ordinary")){
+//                    rule = new OrdinaryRule();
+//                } else{
+//                    rule = new BinaryRule();
+//                }
+//                rule.getRuleFromJsonObject(jo);
+//                this.addRule(rule);
+//            }
+//            return 200;
+//        } catch (IOException e){
+//            e.printStackTrace();
+//            return 500;
+//        }
+//    }
 }
 

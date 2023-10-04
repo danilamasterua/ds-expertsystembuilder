@@ -1,4 +1,4 @@
-package ds.esb.expertsystembuilder.classes;
+package ds.esb.expertsystembuilder.classes.deprecated;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;

@@ -11,6 +11,7 @@ public class Variable {
     private int id;
     private String name;
     private HashMap<Integer, String> statuses = new HashMap<>();
+    private VariableType variableType;
 
     public Variable() {
     }
@@ -25,7 +26,8 @@ public class Variable {
         this.name = name;
         this.statuses = statuses;
     }
-
+    public VariableType getVariableType() {return variableType;}
+    public void setVariableType(VariableType variableType) {this.variableType = variableType;}
     public int getId() {
         return id;
     }
@@ -50,9 +52,11 @@ public class Variable {
         this.statuses = statuses;
     }
 
+
     public void getVariableFromJsonObject(JsonObject jsonObject){
         this.setId(jsonObject.get("varId").getAsInt());
         this.setName(jsonObject.get("varName").getAsString());
+        this.setVariableType(VariableType.valueOf(jsonObject.get("varType").getAsString().toUpperCase()));
         JsonArray jsonArray = jsonObject.get("varStatuses").getAsJsonArray();
         for(JsonElement jo:jsonArray){
             this.statuses.put(jo.getAsJsonObject().get("statusId").getAsInt(), jo.getAsJsonObject().get("statusName").getAsString());

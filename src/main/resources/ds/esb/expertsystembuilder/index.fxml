@@ -11,6 +11,9 @@
                    <MenuItem fx:id="chooseProjectBtn" onAction="#chooseProject" text="Завантажити проєкт" />
                    <MenuItem onAction="#exit" text="Вийти" />
                </Menu>
+               <Menu text="Налаштування">
+                   <CheckMenuItem fx:id="showVariables" text="Показати статус змінних"/>
+               </Menu>
            </MenuBar>
     </top>
     <center>

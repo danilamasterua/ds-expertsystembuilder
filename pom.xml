@@ -6,7 +6,7 @@
 
     <groupId>ds.esb</groupId>
     <artifactId>ExpertSystemBuilder</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.0.1-Alpha</version>
     <name>ExpertSystemBuilder</name>
 
     <properties>

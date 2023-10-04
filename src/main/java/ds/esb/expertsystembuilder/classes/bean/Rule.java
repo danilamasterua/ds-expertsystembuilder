@@ -4,13 +4,17 @@ import com.google.gson.JsonObject;
 
 import ds.esb.expertsystembuilder.classes.Model;
 
+/**
+ * Parent class for rules.
+ */
 public abstract class Rule {
     private int queue;
-    private int elseR;
     private int thenR;
-    public Rule(int queue, int elseR, int thenR) {
+
+    public Rule() {}
+
+    public Rule(int queue,  int thenR) {
         this.queue = queue;
-        this.elseR = elseR;
         this.thenR = thenR;
     }
     public int getQueue() {
@@ -19,14 +23,11 @@ public abstract class Rule {
     public void setQueue(int queue) {
         this.queue = queue;
     }
-    public int getElseR() {return elseR;}
-    public void setElseR(int elseR) {this.elseR = elseR;}
     public int getThenR() {return thenR;}
     public void setThenR(int thenR) {this.thenR = thenR;}
 
     public void getRuleFromJsonObject(JsonObject jsonObject){
         this.setQueue(jsonObject.get("queue").getAsInt());
-        this.setElseR(jsonObject.get("else").getAsInt());
         this.setThenR(jsonObject.get("then").getAsInt());
     }
     public boolean checkRule(Model model){return false;}
