@@ -75,8 +75,9 @@ public class IndexController {
                 label.setMinWidth(50);
                 label.setAlignment(Pos.BASELINE_RIGHT);
                 ComboBox<String> status = new ComboBox<>();
-                status.setMinWidth(70);
+                status.setPrefWidth(100);
                 status.setId("var" + entry.getValue().getId());
+                status.getStyleClass().add("split-menu-btn");
                 for (Map.Entry<Integer, String> entry1 : entry.getValue().getStatuses().entrySet()) {
                     status.getItems().add(entry1.getValue());
                 }
@@ -90,6 +91,7 @@ public class IndexController {
         }
         Button button = new Button("Записати");
         button.setId("setVariablesBtn");
+        button.getStyleClass().addAll("btn", "btn-primary");
         variablePane.getChildren().add(button);
         button.setOnAction(check);
     }

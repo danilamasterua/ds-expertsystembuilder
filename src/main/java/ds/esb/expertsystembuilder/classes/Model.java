@@ -44,8 +44,8 @@ public class Model {
                     if(rule instanceof ExpertRule eRule){
                         if(eRule.getVarIf().containsKey(integer)&&!processedRules.contains(eRule.getQueue())){
                             processedRules.add(eRule.getQueue());
-                            sb.append(printExpertRule(eRule));
                             if(eRule.checkRule(this)){
+                                sb.append(printExpertRule(eRule));
                                 choices.put(eRule.getTarget(), eRule.getThenR());
                                 lastRule = eRule.getQueue();
                             }

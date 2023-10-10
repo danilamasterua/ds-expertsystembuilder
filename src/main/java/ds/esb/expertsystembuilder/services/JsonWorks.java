@@ -9,7 +9,6 @@ public class JsonWorks {
     public static Model loadProject(String path) throws RuntimeException{
         Variables variables = new Variables();
         RulesContainer rules = new RulesContainer();
-        DecisionContainer decisions = new DecisionContainer();
         int result = variables.loadVariablesFromJson(path);
         if (result!=200){
             throw new RuntimeException("File with variables was not found, or has an incompatible format");

@@ -79,7 +79,8 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>ds.esb.expertsystembuilder/ds.esb.expertsystembuilder.HelloApplication
+                            <mainClass>
+                                ds.esb.expertsystembuilder.Launcher
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

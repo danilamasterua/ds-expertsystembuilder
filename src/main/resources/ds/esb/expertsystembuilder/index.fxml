@@ -6,7 +6,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ds.esb.expertsystembuilder.controllers.IndexController">
     <top>
-           <MenuBar fx:id="mainMenu">
+           <MenuBar fx:id="mainMenu" styleClass="panel">
                <Menu text="Файл">
                    <MenuItem fx:id="chooseProjectBtn" onAction="#chooseProject" text="Завантажити проєкт" />
                    <MenuItem onAction="#exit" text="Вийти" />
@@ -19,23 +19,23 @@
     <center>
          <BorderPane>
              <left>
-                <VBox prefWidth="300" fx:id="variablePane" spacing="5" style="-fx-border-style: solid; -fx-border-color: lightgrey; -fx-border-width: 1; -fx-padding: 2;" BorderPane.alignment="CENTER_LEFT">
-                    <Label prefWidth="300" style="-fx-font-size: 24;">Змінні</Label>
+                <VBox prefWidth="200" fx:id="variablePane" spacing="5" style="-fx-border-style: solid; -fx-border-color: lightgrey; -fx-border-width: 1; -fx-padding: 2;" BorderPane.alignment="CENTER_LEFT">
+                    <Label prefWidth="300" styleClass="h1">Змінні</Label>
                 </VBox>
              </left>
              <center>
-                <TextArea fx:id="variableStatusesTextArea" editable="false"/>
+                <TextArea fx:id="variableStatusesTextArea" editable="false" styleClass="panel"/>
              </center>
              <right>
-                 <VBox prefWidth="300" style="-fx-border-style: solid; -fx-border-color: lightgrey; -fx-border-width: 1; -fx-padding: 2;">
-                     <Label prefWidth="300" style="-fx-font-size: 24;">Рішення</Label>
+                 <VBox prefWidth="200" style="-fx-border-style: solid; -fx-border-color: lightgrey; -fx-border-width: 1; -fx-padding: 2;">
+                     <Label prefWidth="300" styleClass="h1">Рішення</Label>
                      <Label fx:id="decisionLabel"/>
                  </VBox>
              </right>
          </BorderPane>
     </center>
     <bottom>
-    <StatusBar fx:id="statusBar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+    <StatusBar fx:id="statusBar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" styleClass="panel-footer">
         <rightItems><Label fx:id="debugLabel" /></rightItems>
     </StatusBar>
     </bottom>
