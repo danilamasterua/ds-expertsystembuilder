@@ -3,7 +3,6 @@ package ds.esb.expertsystembuilder.services;
 import ds.esb.expertsystembuilder.classes.Model;
 import ds.esb.expertsystembuilder.classes.RulesContainer;
 import ds.esb.expertsystembuilder.classes.Variables;
-import ds.esb.expertsystembuilder.classes.deprecated.DecisionContainer;
 
 public class JsonWorks {
     public static Model loadProject(String path) throws RuntimeException{

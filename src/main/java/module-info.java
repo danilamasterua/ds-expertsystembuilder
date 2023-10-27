@@ -13,5 +13,4 @@ module ds.esb.expertsystembuilder {
     opens ds.esb.expertsystembuilder.classes to javafx.fxml, javafx.base;
     opens ds.esb.expertsystembuilder.classes.bean to javafx.fxml, javafx.base;
     exports ds.esb.expertsystembuilder;
-    opens ds.esb.expertsystembuilder.classes.deprecated to javafx.base, javafx.fxml;
 }
