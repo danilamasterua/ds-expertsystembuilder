@@ -10,22 +10,12 @@ import java.util.Map;
 public class Variable {
     private int id;
     private String name;
-    private HashMap<Integer, String> statuses = new HashMap<>();
+    private final HashMap<Integer, String> statuses = new HashMap<>();
     private VariableType variableType;
 
     public Variable() {
     }
-    public Variable(int id, String name) {
-        this.id = id;
-        this.name = name;
-        statuses.put(1, "true");
-        statuses.put(2, "false");
-    }
-    public Variable(int id, String name, HashMap<Integer, String> statuses) {
-        this.id = id;
-        this.name = name;
-        this.statuses = statuses;
-    }
+
     public VariableType getVariableType() {return variableType;}
     public void setVariableType(VariableType variableType) {this.variableType = variableType;}
     public int getId() {
@@ -48,9 +38,7 @@ public class Variable {
         return statuses;
     }
 
-    public void setStatuses(HashMap<Integer, String> statuses) {
-        this.statuses = statuses;
-    }
+//    public void setStatuses(HashMap<Integer, String> statuses) {this.statuses = statuses;}
 
 
     public void getVariableFromJsonObject(JsonObject jsonObject){

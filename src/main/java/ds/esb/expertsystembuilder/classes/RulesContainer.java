@@ -1,7 +1,6 @@
 package ds.esb.expertsystembuilder.classes;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import ds.esb.expertsystembuilder.classes.bean.Rule;
@@ -14,13 +13,13 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 public class RulesContainer {
-    private ArrayList<Rule> rules = new ArrayList<>();
+    private final ArrayList<Rule> rules = new ArrayList<>();
 
     public RulesContainer() {
     }
-    public RulesContainer(ArrayList<Rule> rules) {this.rules = rules;}
+//    public RulesContainer(ArrayList<Rule> rules) {this.rules = rules;}
     public ArrayList<Rule> getRules() {return rules;}
-    public void setRules(ArrayList<Rule> rules) {this.rules = rules;}
+//    public void setRules(ArrayList<Rule> rules) {this.rules = rules;}
     public void addRule(Rule rule){
         rules.add(rule);
         rules.sort(Comparator.comparingInt(Rule::getQueue));
@@ -56,34 +55,5 @@ public class RulesContainer {
             return ruleD;
         }
     }
-
-//    /**
-//     * Method for work with deprecated type of rules. Do not recommend to use.
-//     * @param path <i>String</i> path to folder, what contains file <b>rulesDeprecated.json</b>
-//     * @return <i>int</i> status code
-//     */
-//    public int loadRulesFromJson(String path){
-//        try {
-//            Path file = FileSystems.getDefault().getPath(path+"/rulesDeprecated.json");
-//            String json = Files.readString(file);
-//            JsonArray array = JsonParser.parseString(json).getAsJsonArray();
-//            for(JsonElement el:array){
-//                JsonObject jo = el.getAsJsonObject();
-//                String type = jo.get("type").getAsString();
-//                Rule rule;
-//                if(type.equals("ordinary")){
-//                    rule = new OrdinaryRule();
-//                } else{
-//                    rule = new BinaryRule();
-//                }
-//                rule.getRuleFromJsonObject(jo);
-//                this.addRule(rule);
-//            }
-//            return 200;
-//        } catch (IOException e){
-//            e.printStackTrace();
-//            return 500;
-//        }
-//    }
 }
 

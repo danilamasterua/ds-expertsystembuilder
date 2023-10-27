@@ -1,14 +1,10 @@
 package ds.esb.expertsystembuilder.classes;
 
-import ds.esb.expertsystembuilder.classes.bean.Decision;
 import ds.esb.expertsystembuilder.classes.bean.Rule;
 import ds.esb.expertsystembuilder.classes.bean.Variable;
-import ds.esb.expertsystembuilder.classes.bean.VariableType;
-import ds.esb.expertsystembuilder.classes.deprecated.DecisionContainer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class Model {
     private Variables variables;
@@ -23,15 +19,15 @@ public class Model {
     }
     public Model() {}
     public Variables getVariables() {return variables;}
-    public void setVariables(Variables variables) {this.variables = variables;}
+//    public void setVariables(Variables variables) {this.variables = variables;}
     public RulesContainer getRules() {return rules;}
-    public void setRules(RulesContainer rules) {this.rules = rules;}
+//    public void setRules(RulesContainer rules) {this.rules = rules;}
     public HashMap<Integer, Integer> getChoices() {return choices;}
     public void setChoices(HashMap<Integer, Integer> choices) {this.choices = choices;}
-    public ArrayList<Integer> getProcessedRules() {return processedRules;}
+//    public ArrayList<Integer> getProcessedRules() {return processedRules;}
     public void setProcessedRules(ArrayList<Integer> processedRules) {this.processedRules = processedRules;}
     public int getLastRule() {return lastRule;}
-    public void setLastRule(int lastRule) {this.lastRule = lastRule;}
+//    public void setLastRule(int lastRule) {this.lastRule = lastRule;}
     public void putChoice(Integer varId, Integer chId){
         this.choices.put(varId, chId);
     }
