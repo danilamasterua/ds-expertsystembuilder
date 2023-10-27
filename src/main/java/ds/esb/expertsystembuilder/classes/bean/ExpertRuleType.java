@@ -12,7 +12,7 @@ public enum ExpertRuleType {
             boolean ret = false;
             ExpertRuleType.checkVariables(varIf, model);
             for (Map.Entry<Integer, Integer> entry:varIf.entrySet()) {
-                if (entry.getValue().equals(model.getChoices().get(entry.getKey()))){
+                if (entry.getValue().equals(model.getChoices().get(entry.getKey()))&&model.getChoices().get(entry.getKey())!=null){
                     ret=true;
                 } else {
                     ret=false;
