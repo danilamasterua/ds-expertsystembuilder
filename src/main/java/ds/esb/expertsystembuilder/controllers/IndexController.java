@@ -8,15 +8,18 @@ import ds.esb.expertsystembuilder.services.JsonWorks;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import org.controlsfx.control.StatusBar;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -80,7 +83,7 @@ public class IndexController {
     }
 
     @FXML
-    public void chooseProject(){
+    public void chooseProject() throws IOException {
         Stage stage = (Stage) mainMenu.getScene().getWindow();
         DirectoryChooser directoryChooser = new DirectoryChooser();
         File dir = directoryChooser.showDialog(stage);
@@ -91,6 +94,7 @@ public class IndexController {
             chooseProjectBtn.setDisable(true);
         } catch (RuntimeException ex){
             statusBar.setText(ex.getMessage());
+            ex.printStackTrace();
         }
     }
 

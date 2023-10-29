@@ -27,7 +27,7 @@
                 </VBox>
              </left>
              <center>
-                <TextArea fx:id="variableStatusesTextArea" editable="false" styleClass="panel"/>
+                <TextArea fx:id="variableStatusesTextArea" editable="false" wrapText="true"/>
              </center>
              <right>
                  <VBox prefWidth="200" style="-fx-border-style: solid; -fx-border-color: lightgrey; -fx-border-width: 1; -fx-padding: 2;">
@@ -38,7 +38,7 @@
          </BorderPane>
     </center>
     <bottom>
-    <StatusBar fx:id="statusBar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" styleClass="panel-footer">
+    <StatusBar fx:id="statusBar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <rightItems><Label fx:id="debugLabel" /></rightItems>
     </StatusBar>
     </bottom>
