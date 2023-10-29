@@ -6,13 +6,16 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ds.esb.expertsystembuilder.controllers.IndexController">
     <top>
-           <MenuBar fx:id="mainMenu">
-               <Menu text="Файл">
+           <MenuBar fx:id="mainMenu" styleClass="panel">
+               <Menu fx:id="fileMenu" text="Файл">
                    <MenuItem fx:id="chooseProjectBtn" onAction="#chooseProject" text="Завантажити проєкт" />
-                   <MenuItem onAction="#exit" text="Вийти" />
+                   <MenuItem fx:id="exitBtn" onAction="#exit" text="Вийти" />
                </Menu>
-               <Menu text="Налаштування">
-                   <CheckMenuItem fx:id="showVariables" text="Показати статус змінних" selected="true"/>
+               <Menu fx:id="preferencesMenu" text="Налаштування">
+                   <CheckMenuItem fx:id="showVariables" text="Показати статус змінних"/>
+                   <Menu fx:id="languageMenu" text="Language">
+
+                   </Menu>
                </Menu>
            </MenuBar>
     </top>
@@ -20,7 +23,7 @@
          <BorderPane>
              <left>
                 <VBox prefWidth="200" fx:id="variablePane" spacing="5" style="-fx-border-style: solid; -fx-border-color: lightgrey; -fx-border-width: 1; -fx-padding: 2;" BorderPane.alignment="CENTER_LEFT">
-                    <Label prefWidth="300">Змінні</Label>
+                    <Label fx:id="vaiablesPaneTitle" prefWidth="300" styleClass="h1">Змінні</Label>
                 </VBox>
              </left>
              <center>
@@ -28,8 +31,8 @@
              </center>
              <right>
                  <VBox prefWidth="200" style="-fx-border-style: solid; -fx-border-color: lightgrey; -fx-border-width: 1; -fx-padding: 2;">
-                     <Label prefWidth="300">Рішення</Label>
-                     <Label fx:id="decisionLabel" wrapText="true"/>
+                     <Label fx:id="decisionPaneLabel" prefWidth="300" styleClass="h1">Рішення</Label>
+                     <Label fx:id="decisionLabel"/>
                  </VBox>
              </right>
          </BorderPane>

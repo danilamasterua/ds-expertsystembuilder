@@ -12,11 +12,6 @@ public abstract class Rule {
     private int thenR;
 
     public Rule() {}
-
-    public Rule(int queue,  int thenR) {
-        this.queue = queue;
-        this.thenR = thenR;
-    }
     public int getQueue() {
         return queue;
     }
