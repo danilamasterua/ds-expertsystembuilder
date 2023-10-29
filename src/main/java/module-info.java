@@ -9,10 +9,9 @@ module ds.esb.expertsystembuilder {
     requires com.google.gson;
 
     opens ds.esb.expertsystembuilder to javafx.fxml;
-    opens ds.esb.expertsystembuilder.controllers to javafx.fxml;
+    opens ds.esb.expertsystembuilder.controllers to javafx.fxml, javafx.base;
     opens ds.esb.expertsystembuilder.classes to javafx.fxml, javafx.base;
     opens ds.esb.expertsystembuilder.classes.bean to javafx.fxml, javafx.base;
     exports ds.esb.expertsystembuilder;
-    opens ds.esb.expertsystembuilder.classes.deprecated to javafx.base, javafx.fxml;
     exports ds.esb.expertsystembuilder.controllers;
 }

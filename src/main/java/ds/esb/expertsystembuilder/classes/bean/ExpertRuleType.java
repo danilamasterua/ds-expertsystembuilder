@@ -53,9 +53,7 @@ public enum ExpertRuleType {
             if(model.getChoices().get(entry.getKey())==null){
                 Variable variable = model.getVariables().getVariableById(entry.getKey());
                 Optional<String> result = getResult(variable);
-                result.ifPresent(res->{
-                    model.putChoice(entry.getKey(), model.getVariables().getVariableById(entry.getKey()).searchStatusIdByValue(res));
-                });
+                result.ifPresent((String res) -> model.putChoice(entry.getKey(), model.getVariables().getVariableById(entry.getKey()).searchStatusIdByValue(res)));
             }
         }
     }

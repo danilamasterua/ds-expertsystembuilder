@@ -1,0 +1,15 @@
+{
+  "stFileMenu": "Файл",
+  "stFileExit": "Вийти",
+  "stPreferencesMenu": "Налаштування",
+  "stPreferencesShowVariable": "Показати статус змінних",
+  "stVariablesPane": "Змінні",
+  "stDecisionPane": "Рішення",
+  "stLoadProject": "Завантажити проєкт",
+  "stAnswersRead": "Відповіді записано",
+  "stButtonRead": "Записати",
+  "stAlert501Title": "Змінні не ініціалізовано",
+  "stAlert501Header": "Помилка 501. Відсутні дані для початку роботи.",
+  "stAlert501Message": "Для початку роботи ініціалізуйте хоча б одну змінну.",
+  "stInitializeVariable": "Ініціалізація змінної"
+}

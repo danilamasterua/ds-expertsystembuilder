@@ -1,0 +1,15 @@
+{
+  "stFileMenu": "File",
+  "stFileExit": "Exit",
+  "stPreferencesMenu": "Preferences",
+  "stPreferencesShowVariable": "Show variables statuses",
+  "stVariablesPane": "Variables",
+  "stDecisionPane": "Decision",
+  "stLoadProject": "Load project",
+  "stAnswersRead": "Answers has been read",
+  "stButtonRead": "Read",
+  "stAlert501Title": "Variables has been not initialized",
+  "stAlert501Header": "Error 501. No one variable initialized.",
+  "stAlert501Message": "For starting work, please initialize variable",
+  "stInitializeVariable": "Variable initialization"
+}

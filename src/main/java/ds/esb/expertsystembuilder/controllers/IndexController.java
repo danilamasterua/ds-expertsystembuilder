@@ -10,8 +10,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -36,15 +34,48 @@ public class IndexController {
     public Label decisionLabel;
     @FXML
     public CheckMenuItem showVariables;
+    public Menu languageMenu;
+    public MenuItem exitBtn;
+    public Label vaiablesPaneTitle;
+    public Menu fileMenu;
+    public Menu preferencesMenu;
+    public Label decisionPaneLabel;
     @FXML
     private Label debugLabel;
     @FXML
     private MenuBar mainMenu;
     @FXML
     private VBox variablePane;
-    private Map<Integer, ComboBox<String>> variablesComboBoxes = new HashMap<>();
+    private final Map<Integer, ComboBox<String>> variablesComboBoxes = new HashMap<>();
     private Model model = new Model();
-    private Scene scene;
+    private HashMap<String, String> localizations = new HashMap<>();
+    private HashMap<String, String> localization = new HashMap<>();
+
+    public void initialize(){
+        try {
+            localizations = JsonWorks.getLocalizations();
+            for (var l : localizations.entrySet()) {
+                MenuItem mi = new MenuItem(l.getKey());
+                mi.setOnAction(actionEvent -> {
+                    String a = mi.getText();
+                    localization = JsonWorks.getLocalization(localizations.get(a));
+                    setLocale();
+                });
+                languageMenu.getItems().add(mi);
+            }
+            String locale = Locale.getDefault().getDisplayLanguage();
+            System.out.println(locale);
+            try {
+                localization = JsonWorks.getLocalization(localizations.get(locale));
+            } catch (Exception e) {
+                debugLabel.setText(e.getMessage());
+                localization = JsonWorks.getLocalization(localizations.get("english"));
+            }
+            setLocale();
+        } catch (RuntimeException e){
+            debugLabel.setText(e.getMessage());
+        }
+    }
 
     @FXML
     public void exit(){
@@ -59,7 +90,6 @@ public class IndexController {
         File dir = directoryChooser.showDialog(stage);
         try {
             model = JsonWorks.loadProject(dir.getAbsolutePath());
-            String pth = dir.getAbsolutePath();
             statusBar.setText(dir.getAbsolutePath());
             addVariablesFields(model.getVariables());
             chooseProjectBtn.setDisable(true);
@@ -67,6 +97,17 @@ public class IndexController {
             statusBar.setText(ex.getMessage());
             ex.printStackTrace();
         }
+    }
+
+    @FXML
+    private void setLocale(){
+        chooseProjectBtn.setText(localization.get("stLoadProject"));
+        showVariables.setText(localization.get("stPreferencesShowVariable"));
+        exitBtn.setText(localization.get("stFileExit"));
+        vaiablesPaneTitle.setText(localization.get("stVariablesPane"));
+        fileMenu.setText(localization.get("stFileMenu"));
+        preferencesMenu.setText(localization.get("stPreferencesMenu"));
+        decisionPaneLabel.setText(localization.get("stDecisionPane"));
     }
 
     @FXML
@@ -79,7 +120,7 @@ public class IndexController {
                 label.setMinWidth(50);
                 label.setAlignment(Pos.BASELINE_RIGHT);
                 ComboBox<String> status = new ComboBox<>();
-                status.setPrefWidth(100);
+                status.setPrefWidth(150);
                 status.setId("var" + entry.getValue().getId());
                 status.getStyleClass().add("split-menu-btn");
                 for (Map.Entry<Integer, String> entry1 : entry.getValue().getStatuses().entrySet()) {
@@ -93,7 +134,7 @@ public class IndexController {
         for (HBox hBox:hboxes){
             variablePane.getChildren().add(hBox);
         }
-        Button button = new Button("Записати");
+        Button button = new Button(localization.get("stButtonRead"));
         button.setId("setVariablesBtn");
         button.getStyleClass().addAll("btn", "btn-primary");
         variablePane.getChildren().add(button);
@@ -124,7 +165,7 @@ public class IndexController {
                         logic+= model.printDecisionVariables();
                     }
                     variableStatusesTextArea.setText(logic);
-                    statusBar.setText("Відповіді записано");
+                    statusBar.setText(localization.get("stAnswersRead"));
                     debugLabel.setText(String.valueOf(model.getLastRule()));
                     decisionLabel.setText(model.printDecision());
                     for (var entry:variablesComboBoxes.entrySet()){
@@ -132,9 +173,9 @@ public class IndexController {
                     }
                 } else if (statusCode.get()==501){
                     Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Змінні не ініціалізовано");
-                    alert.setHeaderText("Помилка 501. Відсутні дані для початку роботи.");
-                    alert.setContentText("Для початку роботи ініціалізуйте хоча б одну змінну.");
+                    alert.setTitle(localization.get("stAlert501Title"));
+                    alert.setHeaderText(localization.get("stAlert501Header"));
+                    alert.setContentText(localizations.get("stAlert501Message"));
                     alert.showAndWait();
                 }
             }
