@@ -1,0 +1,10 @@
+[
+  {
+    "locale": "українська",
+    "file": "ua.json"
+  },
+  {
+    "locale": "english",
+    "file": "en.json"
+  }
+]
