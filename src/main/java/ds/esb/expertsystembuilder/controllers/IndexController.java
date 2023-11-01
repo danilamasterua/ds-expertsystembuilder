@@ -46,7 +46,7 @@ public class IndexController {
     private MenuBar mainMenu;
     @FXML
     private VBox variablePane;
-    private final Map<Integer, ComboBox<String>> variablesComboBoxes = new HashMap<>();
+    private ToggleGroup variablesToggleGroup = new ToggleGroup();
     private Model model = new Model();
     private HashMap<String, String> localizations = new HashMap<>();
     private HashMap<String, String> localization = new HashMap<>();
@@ -64,10 +64,10 @@ public class IndexController {
                 languageMenu.getItems().add(mi);
             }
             String locale = Locale.getDefault().getDisplayLanguage();
-            System.out.println(locale);
             try {
                 localization = JsonWorks.getLocalization(localizations.get(locale));
             } catch (Exception e) {
+                debugLabel.setText(e.getMessage());
                 localization = JsonWorks.getLocalization(localizations.get("english"));
             }
             setLocale();
@@ -111,32 +111,21 @@ public class IndexController {
 
     @FXML
     private void addVariablesFields(Variables variables){
-        ArrayList<HBox> hboxes = new ArrayList<>();
-        for (Map.Entry<Integer, Variable> entry:variables.getVariables().entrySet()){
-            if (entry.getValue().getVariableType()==VariableType.INITIALIZABLE) {
-                HBox var = new HBox(10);
-                Label label = new Label(entry.getValue().getName());
-                label.setMinWidth(50);
-                label.setAlignment(Pos.BASELINE_RIGHT);
-                ComboBox<String> status = new ComboBox<>();
-                status.setPrefWidth(150);
-                status.setId("var" + entry.getValue().getId());
-                status.getStyleClass().add("split-menu-btn");
-                for (Map.Entry<Integer, String> entry1 : entry.getValue().getStatuses().entrySet()) {
-                    status.getItems().add(entry1.getValue());
-                }
-                var.getChildren().addAll(label, status);
-                hboxes.add(var);
-                variablesComboBoxes.put(entry.getValue().getId(), status);
-            }
-        }
-        for (HBox hBox:hboxes){
-            variablePane.getChildren().add(hBox);
-        }
+        VBox v = new VBox();
+        ArrayList<RadioButton> rblist = new ArrayList<>();
+        variables.getVariables().forEach((key, variable)->{
+            RadioButton rb = new RadioButton(variable.getName());
+            rb.setUserData(key);
+            rblist.add(rb);
+        });
+        rblist.forEach(rb->{
+            v.getChildren().add(rb);
+            rb.setToggleGroup(variablesToggleGroup);
+        });
         Button button = new Button(localization.get("stButtonRead"));
         button.setId("setVariablesBtn");
         button.getStyleClass().addAll("btn", "btn-primary");
-        variablePane.getChildren().add(button);
+        variablePane.getChildren().addAll(v, button);
         button.setOnAction(check);
     }
     
@@ -147,29 +136,20 @@ public class IndexController {
                 model.setChoices(new HashMap<>());
                 variableStatusesTextArea.setText("");
                 AtomicInteger statusCode = new AtomicInteger(501);
-                for(Map.Entry<Integer, ComboBox<String>> entry:variablesComboBoxes.entrySet()){
-                    if (entry.getValue().getValue()!=null) {
-                        try {
-                            model.putChoice(entry.getKey(), model.getVariables().getVariableById(entry.getKey()).searchStatusIdByValue(entry.getValue().getValue()));
-                            statusCode.set(200);
-                        } catch (Exception e) {
-                            statusCode.set(500);
-                            statusBar.setText(e.getMessage());
-                        }
-                    }
+                if(variablesToggleGroup.getSelectedToggle()!=null){
+                    statusCode.set(200);
                 }
                 if(statusCode.get() == 200) {
-                    String logic = model.doExpertLogic();
-                    if(showVariables.isSelected()){
-                        logic+= model.printDecisionVariables();
-                    }
-                    variableStatusesTextArea.setText(logic);
+                    RadioButton selected = (RadioButton) variablesToggleGroup.getSelectedToggle();
+                    debugLabel.setText(selected.getUserData().toString());
                     statusBar.setText(localization.get("stAnswersRead"));
-                    debugLabel.setText(String.valueOf(model.getLastRule()));
-                    decisionLabel.setText(model.printDecision());
-                    for (var entry:variablesComboBoxes.entrySet()){
-                        entry.getValue().setValue(model.getVariables().getVariableById(entry.getKey()).getStatuses().get(model.getChoices().get(entry.getKey())));
+                    model.setPoint(Integer.parseInt(selected.getUserData().toString()));
+                    String dev = model.doExpertLogic();
+                    if(showVariables.isSelected()){
+                        dev += model.printDecisionVariables();
                     }
+                    variableStatusesTextArea.setText(dev);
+                    decisionLabel.setText(model.printDecision());
                 } else if (statusCode.get()==501){
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle(localization.get("stAlert501Title"));

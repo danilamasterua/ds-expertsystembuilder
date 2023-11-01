@@ -50,7 +50,7 @@ public enum ExpertRuleType {
     }
     private static void checkVariables(HashMap<Integer, Integer> varIf, Model model){
         for (var entry:varIf.entrySet()){
-            if(model.getChoices().get(entry.getKey())==null){
+            if(!model.getChoices().containsKey(entry.getKey())){
                 Variable variable = model.getVariables().getVariableById(entry.getKey());
                 Optional<String> result = getResult(variable);
                 result.ifPresent((String res) -> model.putChoice(entry.getKey(), model.getVariables().getVariableById(entry.getKey()).searchStatusIdByValue(res)));
